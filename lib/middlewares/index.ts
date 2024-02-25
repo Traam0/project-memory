@@ -1,0 +1,1 @@
+export {default as GetValidationMiddleware} from "@/lib/middlewares/validation_middleware"
