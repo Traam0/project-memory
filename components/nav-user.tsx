@@ -36,7 +36,6 @@ export function NavUser({
   };
 }) {
   const { isMobile } = useSidebar();
-  console.log(user);
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -90,13 +89,15 @@ export function NavUser({
                 Account
               </DropdownMenuItem>
 
-              <DropdownMenuItem>
+              <DropdownMenuItem disabled>
                 <IconNotification />
                 Notifications
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => signOut()}>
+            <DropdownMenuItem
+              onClick={() => signOut({ redirect: true, redirectTo: "/login" })}
+            >
               <IconLogout />
               Log out
             </DropdownMenuItem>

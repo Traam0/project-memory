@@ -21,6 +21,31 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Vault } from "lucide-react";
+import { useRef } from "react";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "./ui/drawer";
+import { useToggle } from "@/hooks/use-toggle";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
+import { Label } from "./ui/label";
+import { Input } from "./ui/input";
+import { Field, FieldGroup, FieldLabel } from "./ui/field";
 
 const items = [
   {
@@ -51,12 +76,27 @@ const items = [
 ];
 
 export function NavMain() {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Send file to backend
+    const formData = new FormData();
+    formData.append("file", file);
+
+    console.log(formData);
+  };
+  const [drawerOpen, toggleDrawerOpen] = useToggle();
+
   return (
     <SidebarGroup>
+      {QuickActionDrawer()}
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
           <SidebarMenuItem className="flex items-center gap-2">
             <SidebarMenuButton
+              onClick={toggleDrawerOpen}
               tooltip="Upload Moment"
               className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
             >
@@ -64,12 +104,21 @@ export function NavMain() {
               <span>Upload Moment</span>
             </SidebarMenuButton>
             <Button
+              onClick={() => inputRef.current?.click()}
               size="icon"
               className="size-8 group-data-[collapsible=icon]:opacity-0"
               variant="outline"
             >
               <IconCamera />
               <span className="sr-only">upload to gallery</span>
+              <input
+                ref={inputRef}
+                type="file"
+                accept="image/*;capture=camera"
+                capture="environment" // forces camera first on mobile
+                className="hidden"
+                onChange={onFileChange}
+              />
             </Button>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -86,4 +135,52 @@ export function NavMain() {
       </SidebarGroupContent>
     </SidebarGroup>
   );
+
+  function QuickActionDrawer() {
+    return (
+      <Drawer open={drawerOpen} onClose={toggleDrawerOpen}>
+        <DrawerContent className="flex flex-col items-center px-12">
+          <DrawerHeader>
+            <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+            <DrawerDescription>This action cannot be undone.</DrawerDescription>
+          </DrawerHeader>
+          <form className="w-full">
+            <FieldGroup>
+              <Field>
+                <FieldLabel>Password</FieldLabel>
+                <Input
+                  name="password"
+                  type="password"
+                  placeholder="********"
+                  required
+                />
+              </Field>
+
+              <Field>
+                <FieldLabel>Confirm Password</FieldLabel>
+                <Input
+                  name="confirmPassword"
+                  type="password"
+                  placeholder="********"
+                  required
+                />
+              </Field>
+            </FieldGroup>
+            <FieldGroup className="py-2">
+              <Field>
+                <Button type="submit">Submit</Button>
+              </Field>
+              <Field>
+                <DrawerClose asChild>
+                  <Button type="button" variant="outline">
+                    Cancel
+                  </Button>
+                </DrawerClose>
+              </Field>
+            </FieldGroup>
+          </form>
+        </DrawerContent>
+      </Drawer>
+    );
+  }
 }

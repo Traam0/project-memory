@@ -1,4 +1,3 @@
-import crypto from "crypto";
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
@@ -57,6 +56,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       if (token?.id) session.user.id = token.id;
       return session;
     },
+
     async signIn({ user, account }) {
       if (!account || account.type !== "oauth") return true;
 

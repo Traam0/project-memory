@@ -1,4 +1,3 @@
-import { AppSidebar } from "@/components/app-sidebar";
 import { NavDocuments } from "@/components/nav-documents";
 import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
@@ -14,8 +13,10 @@ import {
   SidebarMenuItem,
   SidebarProvider,
 } from "@/components/ui/sidebar";
-import { auth, signOut } from "@/lib/auth";
+import { auth } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
 import { IconInnerShadowTop } from "@tabler/icons-react";
+import { redirect } from "next/navigation";
 
 async function Layout({
   children,
@@ -23,7 +24,12 @@ async function Layout({
   children: React.ReactNode;
 }>): Promise<React.ReactElement> {
   const session = await auth();
-  console.log(session)
+  // const u = await prisma.user.findUnique({
+  //   where: { email: session?.user.email! },
+  // });
+
+  // if (u?.password == null) redirect("/set-password");
+  // console.log(session);
   return (
     <SidebarProvider
       style={
