@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useEffect } from "react";
 import { IconArrowRight } from "@tabler/icons-react";
@@ -8,7 +8,16 @@ import {
   motion,
   animate,
 } from "framer-motion";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -38,7 +47,6 @@ export const AuroraHero = () => {
       }}
       className="relative grid min-h-screen place-content-center overflow-hidden bg-gray-950 px-4 py-24 text-gray-200"
     >
-
       <div className="relative z-10 flex flex-col items-center">
         {/* <motion.span className="mb-1.5 inline-block rounded-full bg-gray-600/50 px-3 py-1.5 text-sm"
             style={{border}}
@@ -65,7 +73,11 @@ export const AuroraHero = () => {
                 </div>
                 <div className="grid gap-3">
                   <Label htmlFor="username-1">Username</Label>
-                  <Input id="username-1" name="username" defaultValue="@peduarte" />
+                  <Input
+                    id="username-1"
+                    name="username"
+                    defaultValue="@peduarte"
+                  />
                 </div>
               </div>
               <DialogFooter>
@@ -81,8 +93,7 @@ export const AuroraHero = () => {
           Project-Memory
         </h1>
         <p className="my-6 max-w-xl text-center text-base leading-relaxed md:text-lg md:leading-relaxed">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae, et,
-          distinctio eum impedit nihil ipsum modi.
+          A project inpired by you, for you !
         </p>
         <motion.button
           style={{

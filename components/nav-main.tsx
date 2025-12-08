@@ -147,15 +147,9 @@ export function NavMain() {
           <form className="w-full">
             <FieldGroup>
               <Field>
-                <FieldLabel>Password</FieldLabel>
-                <Input
-                  name="password"
-                  type="password"
-                  placeholder="********"
-                  required
-                />
+                <FieldLabel>Moment</FieldLabel>
+                <Input name="moment" type="file" accept="image/*" required />
               </Field>
-
               <Field>
                 <FieldLabel>Confirm Password</FieldLabel>
                 <Input
@@ -166,11 +160,16 @@ export function NavMain() {
                 />
               </Field>
             </FieldGroup>
-            <FieldGroup className="py-2">
+            <FieldGroup>
+              <Field>
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+              </Field>
+            </FieldGroup>
+            <FieldGroup>
               <Field>
                 <Button type="submit">Submit</Button>
-              </Field>
-              <Field>
                 <DrawerClose asChild>
                   <Button type="button" variant="outline">
                     Cancel

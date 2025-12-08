@@ -16,7 +16,14 @@ import {
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { IconInnerShadowTop } from "@tabler/icons-react";
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Dashboard | project-memory",
+  description:
+    "Preserve your memories as shards in a digital Engram that evolves, fades, and strengthens like a human mind.",
+};
 
 async function Layout({
   children,
