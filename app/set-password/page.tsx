@@ -87,9 +87,7 @@ async function setPasswordAction(formData: FormData) {
 
 export default async function Page({
   searchParams,
-}: {
-  searchParams: { password?: string; confirmPassword?: string };
-}) {
+}: PageProps<"/set-password">) {
   const { password, confirmPassword } = await searchParams;
   return (
     <div className="bg-background flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
@@ -121,7 +119,7 @@ export default async function Page({
                       required
                     />
                     {password && (
-                      <FieldError errors={[{ message: password }]} />
+                      <FieldError errors={[{ message: password as string }]} />
                     )}
                   </Field>
 
@@ -134,7 +132,9 @@ export default async function Page({
                       required
                     />
                     {confirmPassword && (
-                      <FieldError errors={[{ message: confirmPassword }]} />
+                      <FieldError
+                        errors={[{ message: confirmPassword as string }]}
+                      />
                     )}
                   </Field>
 

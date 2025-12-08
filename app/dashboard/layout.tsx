@@ -24,12 +24,12 @@ async function Layout({
   children: React.ReactNode;
 }>): Promise<React.ReactElement> {
   const session = await auth();
-  // const u = await prisma.user.findUnique({
-  //   where: { email: session?.user.email! },
-  // });
+  const u = await prisma.user.findUnique({
+    where: { email: session?.user.email! },
+  });
 
-  // if (u?.password == null) redirect("/set-password");
-  // console.log(session);
+  if (u?.password == null) redirect("/set-password");
+  console.log(session);
   return (
     <SidebarProvider
       style={
